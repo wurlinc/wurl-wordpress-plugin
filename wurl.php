@@ -71,8 +71,8 @@ class WurlFeedWidget extends WP_Widget {
 
 		//Display the name 
     print( '<wurl:feed');
-    if ($site_name) { printf(' data-site_name="%s"', rawurlencode($site_name)); }
-    if ($site_url)  { printf(' data-site_url="%s"', rawurlencode($site_url)); }
+    if ($site_name) { printf(' data-site_name="%s"', $site_name); }
+    if ($site_url)  { printf(' data-site_url="%s"', $site_url); }
     printf( '></wurl:feed>');
 		
 		echo $after_widget;
