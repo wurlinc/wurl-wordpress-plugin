@@ -60,6 +60,7 @@ class WurlFeedWidget extends WP_Widget {
 		//Our variables from the widget settings.
 		$site_name = apply_filters('widget_title', $instance['site_name'] );
 		$site_url  = apply_filters('widget_title', $instance['site_url'] );
+		$theme     = apply_filters('widget_title', $instance['theme'] );
 
 		echo $before_widget;
 
@@ -72,7 +73,8 @@ class WurlFeedWidget extends WP_Widget {
 		//Display the name 
     print( '<wurl:feed');
     if ($site_name) { printf(' data-site_name="%s"', $site_name); }
-    if ($site_url)  { printf(' data-site_url="%s"', $site_url); }
+    if ($site_url)  { printf(' data-site_url="%s"', $site_url);   }
+    if ($theme)     { printf(' data-theme="%s"', $theme);         }
     printf( '></wurl:feed>');
 		
 		echo $after_widget;
