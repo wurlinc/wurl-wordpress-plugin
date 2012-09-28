@@ -16,7 +16,7 @@ add_action('wp_enqueue_scripts', 'enqueue_sdk_scripts');
 
 function wurl_init() {
   $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-  $src = $protocol."//tests.martinezcrowd.com/widgets/all.js";
+  $src = $protocol."//wrl.it/widgets/all.js";
   wp_register_script( 'wurl_sdk_all', $src, '', '', true); # In the footer
 }
 
