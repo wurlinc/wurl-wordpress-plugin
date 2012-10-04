@@ -60,7 +60,8 @@ class WurlFeedWidget extends WP_Widget {
 		//Our variables from the widget settings.
 		$site_name = apply_filters('widget_title', $instance['site_name'] );
 		$site_url  = apply_filters('widget_title', $instance['site_url'] );
-		$theme     = apply_filters('widget_title', $instance['theme'] );
+    $theme     = apply_filters('widget_title', $instance['theme'] );
+    $plugin_id = apply_filters('widget_title', $instance['plugin_id'] );
 
 		echo $before_widget;
 
@@ -75,6 +76,7 @@ class WurlFeedWidget extends WP_Widget {
     if ($site_name) { printf(' data-site_name="%s"', $site_name); }
     if ($site_url)  { printf(' data-site_url="%s"', $site_url);   }
     if ($theme)     { printf(' data-theme="%s"', $theme);         }
+    if ($theme)     { printf(' data-plugin_id="%s"', $plugin_id);         }
     printf( '></wurl:feed>');
 		
 		echo $after_widget;
@@ -85,15 +87,10 @@ class WurlFeedWidget extends WP_Widget {
 		//Set up some default widget settings.
 		
 		$defaults = array( 
-		
 		  'site_name' => __('Wurl Feed', 'wurl_feed'), 
 		  'site_url'  => __(get_site_url(), 'site_url'),
-		  'theme'  => __("", 'theme')
-/*
-		  'name' => __('Bilal Shaheen', 'example'), 
-		  'show_info' => true 
-*/
-		  
+      'theme'  => __("", 'theme'),
+      'plugin_id' => __("", 'plugin_id')
 		);
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
 
@@ -109,16 +106,14 @@ class WurlFeedWidget extends WP_Widget {
 		</p>
 
 		<p>
+			<label for="<?php echo $this->get_field_id( 'plugin_id' ); ?>"><?php _e('Plugin ID:', 'plugin_id'); ?></label>
+			<input id="<?php echo $this->get_field_id( 'plugin_id' ); ?>" name="<?php echo $this->get_field_name( 'plugin_id' ); ?>" value="<?php echo $instance['plugin_id']; ?>" style="width:100%;" />
+    </p>
+
+		<p>
 			<label for="<?php echo $this->get_field_id( 'theme' ); ?>"><?php _e('Theme (e.g. dark):', 'theme'); ?></label>
 			<input id="<?php echo $this->get_field_id( 'theme' ); ?>" name="<?php echo $this->get_field_name( 'theme' ); ?>" value="<?php echo $instance['theme']; ?>" style="width:100%;" />
 		</p>
-
-<!--
-		<p>
-			<input class="checkbox" type="checkbox" <?php checked( $instance['show_info'], true ); ?> id="<?php echo $this->get_field_id( 'show_info' ); ?>" name="<?php echo $this->get_field_name( 'show_info' ); ?>" /> 
-			<label for="<?php echo $this->get_field_id( 'show_info' ); ?>"><?php _e('Display info publicly?', 'example'); ?></label>
-		</p>
--->
 
 	<?php
 	}
@@ -131,6 +126,7 @@ class WurlFeedWidget extends WP_Widget {
 		$instance['site_name'] = strip_tags( $new_instance['site_name'] );
 		$instance['site_url'] = strip_tags( $new_instance['site_url'] );
 		$instance['theme'] = $new_instance['theme'];
+		$instance['plugin_id'] = $new_instance['plugin_id'];
 
 		return $instance;
 	}
