@@ -16,12 +16,15 @@ add_action('wp_enqueue_scripts', 'enqueue_sdk_scripts');
 
 function wurl_init() {
   $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-  $src = $protocol."//wrl.it/widgets/all.js";
-  wp_register_script( 'wurl_sdk_all', $src, '', '', true); # In the footer
+	$src = $protocol."//wrl.it/widgets/all.js";
+ 	# In the footer
+  wp_register_script('wurl_sdk_all', $src, '', '', true);
+	wp_register_script('wurl_sdk_events', plugins_url('wurl-wordpress-plugin/wurl_events.js'), 'wurl_sdk_all', '', true); # In the footer
 }
 
 function enqueue_sdk_scripts() {
   wp_enqueue_script( 'wurl_sdk_all' );
+	wp_enqueue_script( 'wurl_sdk_events' );
 }
 
 /* function print_sdk_scripts() {} */
